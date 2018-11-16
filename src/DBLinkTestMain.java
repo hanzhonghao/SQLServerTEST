@@ -20,10 +20,10 @@ public class DBLinkTestMain {
       con = DriverManager.getConnection(url);
       System.out.println("database opetation begin!.");
 
-      int num = 2000000;
+      int num = 1;
 
-      String NMAID = "NMDPTRIAL_dirce_richards_nuance_com20150904142852";
-      String insertSql = "INSERT INTO UUIDTab1(UUID,NMAID) VALUES (?,?)";
+      String NMAID = "ALIPH_NMDP_NMAID_20100916";
+      String insertSql = "INSERT INTO UUIDTabNoIndex(UUID,NMAID) VALUES (?,?)";
       PreparedStatement preparedStatement = con.prepareStatement(insertSql);
       for (int i = 0; i < num; i++) {
         String UUID = UUIDTest.getUUID();
@@ -63,7 +63,6 @@ public class DBLinkTestMain {
     /**
      * add value to sqlserver
      */
-
     preparedStatement.setString(1, uuid);
     preparedStatement.setString(2, NMAID);
     preparedStatement.addBatch();
@@ -84,7 +83,7 @@ public class DBLinkTestMain {
 
   public static void queryData(Statement stmt, ResultSet rs, Connection con) throws SQLException {
     // Create and execute an SQL statement that returns some data.
-    String sql = "SELECT  * FROM UUIDTab1";
+    String sql = "SELECT  TOP 10 UUID,NMAID FROM UUIDTab1";
     stmt = con.createStatement();
     rs = stmt.executeQuery(sql);
     // Iterate through the data in the result set and display it.
